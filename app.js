@@ -3,18 +3,22 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const cors = require('cors');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+const unknownError = require('./middlewares/unknownError');
 const { mongodbURL, PORT } = require('./utils/config');
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(requestLogger);
 app.use(cors());
+app.use(require('./routes/index'));
 
 mongoose.connect(mongodbURL, { useNewUrlParser: true });
-
+app.use(errorLogger);
 app.use(errors());
+app.use(unknownError);
 
 app.listen(PORT, (err) => {
   if (err) {

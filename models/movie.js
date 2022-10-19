@@ -43,7 +43,7 @@ const movieSchema = new mongoose.Schema({
     required: true,
   },
   movieId: {
-    type: Number,
+    type: Number, /* Тип данных на уточнении пока ставлю число? */
     required: true,
   },
   nameRU: {
