@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const unknownError = require('./middlewares/unknownError');
 const { mongodbURL, PORT } = require('./utils/config');
+const limiter = require('./middlewares/limiter');
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
 app.use(helmet());
 app.use(cors());
+app.use(limiter);
 app.use(require('./routes/index'));
 
 mongoose.connect(mongodbURL, { useNewUrlParser: true });
