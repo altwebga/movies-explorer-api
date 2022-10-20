@@ -1,8 +1,8 @@
 require('dotenv').config();
 
 const {
-  mongodbURL = 'mongodb://localhost:27017/bitfilmsdb',
-  PORT = 3001,
+  mongodbURL = 'mongodb://localhost:27017/moviesdb',
+  PORT = 3000,
   NODE_ENV,
   JWT_SECRET,
 } = process.env;

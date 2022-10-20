@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const cors = require('cors');
+const helmet = require('helmet');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const unknownError = require('./middlewares/unknownError');
 const { mongodbURL, PORT } = require('./utils/config');
@@ -12,6 +13,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
+app.use(helmet());
 app.use(cors());
 app.use(require('./routes/index'));
 
